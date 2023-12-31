@@ -1,0 +1,108 @@
+[gd_scene load_steps=14 format=3 uid="uid://8784422uluuj"]
+
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_r3iot"]
+[ext_resource type="PackedScene" uid="uid://dbypupsv3cofp" path="res://scenes/objects/gate.tscn" id="2_0cp0n"]
+[ext_resource type="Texture2D" uid="uid://wvnq82hqa0lg" path="res://graphics/ground/stones.png" id="2_2kmht"]
+[ext_resource type="PackedScene" uid="uid://urhsltpu4agf" path="res://scenes/player/player.tscn" id="2_53n8q"]
+[ext_resource type="Texture2D" uid="uid://bq5ayq18l7pbq" path="res://graphics/decals/dirt_patch.png" id="3_kgybv"]
+[ext_resource type="Texture2D" uid="uid://clw4l4bvo2nhr" path="res://graphics/tilesets/outside_walls.png" id="4_tspcl"]
+[ext_resource type="Texture2D" uid="uid://c7shvj3xlt2y8" path="res://graphics/tilesets/soil.png" id="5_1kim1"]
+[ext_resource type="PackedScene" uid="uid://cwoyyuhjaup2w" path="res://scenes/houses/house.tscn" id="6_64317"]
+[ext_resource type="PackedScene" uid="uid://dgtkq28engu23" path="res://scenes/objects/steam_vent.tscn" id="9_mhekh"]
+[ext_resource type="Script" path="res://scenes/levels/Camera2D.gd" id="10_qjvdd"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_08ys2"]
+resource_name = "walls"
+texture = ExtResource("4_tspcl")
+texture_region_size = Vector2i(390, 390)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+0:3/0 = 0
+2:0/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4lbs0"]
+resource_name = "soil"
+texture = ExtResource("5_1kim1")
+texture_region_size = Vector2i(390, 390)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gostc"]
+tile_size = Vector2i(390, 390)
+sources/0 = SubResource("TileSetAtlasSource_08ys2")
+sources/1 = SubResource("TileSetAtlasSource_4lbs0")
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_r3iot")
+
+[node name="Ground" type="Node2D" parent="."]
+
+[node name="Soil" type="Sprite2D" parent="Ground"]
+texture_repeat = 2
+position = Vector2(561, 516)
+texture = ExtResource("2_2kmht")
+region_enabled = true
+region_rect = Rect2(-4256.49, -2277.59, 16000, 10000)
+
+[node name="Decoration" type="Sprite2D" parent="Ground"]
+modulate = Color(0.92549, 0.803922, 0.572549, 1)
+position = Vector2(-1198, 841)
+texture = ExtResource("3_kgybv")
+
+[node name="TileMap" type="TileMap" parent="Ground"]
+tile_set = SubResource("TileSet_gostc")
+format = 2
+layer_0/name = "Soil"
+layer_0/tile_data = PackedInt32Array(65542, 65537, 1, 5, 1, 1, 6, 65537, 1, 7, 131073, 0, 65543, 131073, 1, 131079, 131073, 2, 131078, 65537, 2, 131077, 1, 2, 65541, 1, 1, -196602, 131073, 0, -131066, 131073, 1, -65530, 131073, 1, -7, 65537, 2, -6, 65537, 2, -5, 65537, 2, -4, 65537, 2, -65543, 65537, 0, -65542, 65537, 0, -65541, 65537, 0, -65540, 65537, 0, -8, 1, 2, -65544, 1, 0, -65539, 131073, 0, -3, 131073, 2, -65531, 1, 1, -131067, 1, 1, -196603, 1, 0)
+layer_1/name = "Walls"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array(-6, 65536, 0, -5, 65536, 0, -4, 131072, 0, -196602, 0, 1, -131066, 0, 2, -65530, 0, 2, 6, 0, 3)
+
+[node name="House" parent="Ground" instance=ExtResource("6_64317")]
+position = Vector2(3510, 1082)
+rotation = 1.5708
+scale = Vector2(0.563, 0.563)
+
+[node name="Gate" parent="." instance=ExtResource("2_0cp0n")]
+position = Vector2(523, -506)
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="SteamVent" parent="." instance=ExtResource("9_mhekh")]
+position = Vector2(-290, 768)
+
+[node name="Player" parent="." instance=ExtResource("2_53n8q")]
+position = Vector2(638, 510)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(0, -150)
+zoom = Vector2(0.6, 0.6)
+position_smoothing_enabled = true
+script = ExtResource("10_qjvdd")
+shakeFade = 20.0
+
+[node name="Timer" type="Timer" parent="Player"]
+wait_time = 0.1
+autostart = true
+
+[connection signal="player_entered_gate" from="Gate" to="." method="_on_gate_player_entered_gate"]
+[connection signal="player_fired_grenade" from="Player" to="." method="_on_player_fired_grenade"]
+[connection signal="player_fired_laser" from="Player" to="." method="_on_player_fired_laser"]
+[connection signal="timeout" from="Player/Timer" to="Player/Camera2D" method="_on_timer_timeout"]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dgtkq28engu23"]
+
+[ext_resource type="Texture2D" uid="uid://c3imw144hkiwa" path="res://graphics/objects/ventilation_hole.png" id="1_5nbmm"]
+[ext_resource type="Texture2D" uid="uid://d10cj6g46v7io" path="res://graphics/decals/white.png" id="2_bx1in"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_37kkw"]
+radius = 88.1419
+
+[sub_resource type="Gradient" id="Gradient_2hu7q"]
+offsets = PackedFloat32Array(0, 0.524496, 1)
+colors = PackedColorArray(0.878431, 0.878431, 0.878431, 0, 0.775063, 0.775063, 0.775063, 0.505882, 0.627451, 0.627451, 0.627451, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7flv7"]
+gradient = SubResource("Gradient_2hu7q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cikjc"]
+emission_shape = 1
+emission_sphere_radius = 42.87
+particle_flag_disable_z = true
+gravity = Vector3(50, -120, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 90.0
+angular_velocity_min = 20.0
+angular_velocity_max = 20.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_max = 3.0
+color = Color(0.878431, 0.878431, 0.878431, 0.717647)
+color_ramp = SubResource("GradientTexture1D_7flv7")
+turbulence_noise_strength = 3.8
+turbulence_noise_scale = 2.5
+
+[node name="SteamVent" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_37kkw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5nbmm")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_cikjc")
+texture = ExtResource("2_bx1in")
+lifetime = 2.0
