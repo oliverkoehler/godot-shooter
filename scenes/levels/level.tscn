@@ -107,6 +107,8 @@ position_smoothing_enabled = true
 wait_time = 0.1
 autostart = true
 
+[connection signal="player_entered" from="Ground/House" to="." method="_on_house_player_entered"]
+[connection signal="player_leave" from="Ground/House" to="." method="_on_house_player_leave"]
 [connection signal="player_entered_gate" from="Gate" to="." method="_on_gate_player_entered_gate"]
 [connection signal="player_fired_grenade" from="Player" to="." method="_on_player_fired_grenade"]
 [connection signal="player_fired_laser" from="Player" to="." method="_on_player_fired_laser"]
