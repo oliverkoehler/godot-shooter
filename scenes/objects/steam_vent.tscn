@@ -14,16 +14,14 @@ colors = PackedColorArray(0.878431, 0.878431, 0.878431, 0, 0.775063, 0.775063, 0
 gradient = SubResource("Gradient_2hu7q")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cikjc"]
+particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 42.87
-particle_flag_disable_z = true
-gravity = Vector3(50, -120, 0)
 initial_velocity_min = 50.0
 initial_velocity_max = 90.0
 angular_velocity_min = 20.0
 angular_velocity_max = 20.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(50, -120, 0)
 scale_max = 3.0
 color = Color(0.878431, 0.878431, 0.878431, 0.717647)
 color_ramp = SubResource("GradientTexture1D_7flv7")
@@ -45,3 +43,4 @@ amount = 100
 process_material = SubResource("ParticleProcessMaterial_cikjc")
 texture = ExtResource("2_bx1in")
 lifetime = 2.0
+fixed_fps = 60
