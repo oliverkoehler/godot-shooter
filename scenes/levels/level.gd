@@ -10,6 +10,7 @@ func _on_player_fired_laser(pos, direction: Vector2):
 	laser.rotation_degrees = rad_to_deg(direction.angle()) + 90
 	laser.direction = direction
 	$Projectiles.add_child(laser)
+	$UI.update_laser_text()
 
 
 func _on_player_fired_grenade(pos, direction):
@@ -17,6 +18,7 @@ func _on_player_fired_grenade(pos, direction):
 	grenade.position = pos
 	grenade.linear_velocity = direction * grenade.speed
 	$Projectiles.add_child(grenade)
+	$UI.update_grenade_text()
 
 
 func _on_house_player_entered():
@@ -27,3 +29,8 @@ func _on_house_player_entered():
 func _on_house_player_leave():
 	var tween = get_tree().create_tween()
 	tween.tween_property($Player/Camera2D, "zoom", Vector2(0.6,0.6), 1)
+
+
+func _on_player_update_stats():
+	$UI.update_laser_text()
+	$UI.update_grenade_text()
