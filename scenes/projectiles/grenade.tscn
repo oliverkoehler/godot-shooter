@@ -180,7 +180,6 @@ speed = 1000
 shape = SubResource("CircleShape2D_8ov8y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_mgarb")
 
@@ -197,7 +196,6 @@ libraries = {
 autoplay = "Blinking"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 color = Color(1, 0, 0, 1)
 energy = 14.0
 texture = ExtResource("4_47gwb")

@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cwoyyuhjaup2w" path="res://scenes/houses/house.tscn" id="6_lru76"]
 [ext_resource type="PackedScene" uid="uid://dgtkq28engu23" path="res://scenes/objects/steam_vent.tscn" id="7_qkuoc"]
 [ext_resource type="PackedScene" uid="uid://ckcdilwvmvusn" path="res://scenes/objects/light_fan_animation.tscn" id="7_ushes"]
-[ext_resource type="PackedScene" uid="uid://c1flsddhstykp" path="res://scenes/items/item.tscn" id="12_b6s5s"]
+[ext_resource type="PackedScene" uid="uid://it7pwncrsy1n" path="res://scenes/enemies/scout.tscn" id="12_d5pq1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_08ys2"]
 resource_name = "walls"
@@ -51,6 +51,11 @@ sources/1 = SubResource("TileSetAtlasSource_4lbs0")
 script = ExtResource("2_dna7a")
 inside_level_scene = ExtResource("3_htbnj")
 
+[node name="Gate" parent="." index="1" instance=ExtResource("2_70jlo")]
+z_index = 1
+position = Vector2(422, -352)
+metadata/_edit_lock_ = true
+
 [node name="Soil" type="Sprite2D" parent="Ground" index="0"]
 texture_repeat = 2
 position = Vector2(561, 516)
@@ -79,13 +84,6 @@ scale = Vector2(0.563, 0.563)
 [node name="SteamVent" parent="Ground" index="4" instance=ExtResource("7_qkuoc")]
 position = Vector2(-290, 768)
 
-[node name="Gate" parent="." index="1" instance=ExtResource("2_70jlo")]
-position = Vector2(422, -352)
-
-[node name="Player" parent="." index="2"]
-position = Vector2(529, 972)
-metadata/_edit_group_ = true
-
 [node name="Fans" type="Node" parent="." index="3"]
 
 [node name="LightFanAnimation2" parent="Fans" index="0" instance=ExtResource("7_ushes")]
@@ -95,7 +93,16 @@ frame_progress = 0.00461558
 [node name="LightFanAnimation" parent="Fans" index="1" instance=ExtResource("7_ushes")]
 position = Vector2(2824, 2173)
 
-[node name="Item" parent="." index="7" instance=ExtResource("12_b6s5s")]
-position = Vector2(168, 606)
+[node name="Player" parent="." index="6"]
+z_index = 2
+position = Vector2(529, 972)
+metadata/_edit_group_ = true
+
+[node name="Scout" parent="Enemies" index="0" instance=ExtResource("12_d5pq1")]
+position = Vector2(281, 664)
+
+[node name="Lights" parent="." index="8"]
+metadata/_edit_lock_ = true
 
 [connection signal="player_entered_gate" from="Gate" to="." method="_on_gate_player_entered_gate"]
+[connection signal="player_entered" from="Ground/House" to="." method="_on_house_player_entered"]

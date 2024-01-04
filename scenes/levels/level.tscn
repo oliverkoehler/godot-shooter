@@ -7,7 +7,14 @@
 [node name="Level" type="Node2D"]
 script = ExtResource("1_r3iot")
 
+[node name="Decals" type="Node2D" parent="."]
+
 [node name="Ground" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_53n8q")]
@@ -22,8 +29,7 @@ position_smoothing_enabled = true
 wait_time = 0.1
 autostart = true
 
-[node name="Projectiles" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
+[node name="Enemies" type="Node2D" parent="."]
 
 [node name="Lights" type="Node2D" parent="."]
 
@@ -31,5 +37,4 @@ metadata/_edit_lock_ = true
 
 [connection signal="player_fired_grenade" from="Player" to="." method="_on_player_fired_grenade"]
 [connection signal="player_fired_laser" from="Player" to="." method="_on_player_fired_laser"]
-[connection signal="update_stats" from="Player" to="." method="_on_player_update_stats"]
 [connection signal="timeout" from="Player/Timer" to="Player/Camera2D" method="_on_timer_timeout"]

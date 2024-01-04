@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 signal player_fired_laser(pos, direction)
 signal player_fired_grenade(pos, direction)
-signal update_stats
 
 var can_laser: bool = true
 var can_grenade: bool = true
@@ -14,6 +13,7 @@ func _process(_delta):
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = direction * speed
 	move_and_slide()
+	Globals.player_pos = global_position
 	
 	# rotate
 	look_at(get_global_mouse_position())
@@ -45,13 +45,3 @@ func _on_main_action_timer_timeout():
 
 func _on_secondary_action_timer_timeout():
 	can_grenade = true
-	
-	
-func add_item(type: String) -> void:
-	if type == 'laser':
-		Globals.laser_amount += 5
-		
-	if type == 'grenade':
-		Globals.grenade_amount += 2
-		
-	update_stats.emit()
