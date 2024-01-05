@@ -38,6 +38,8 @@ func _process(_delta):
 		$SecondaryActionTimer.start()
 		player_fired_grenade.emit(selected_marker.global_position, player_direction)
 
+func hit():
+	Globals.health -= 10
 
 func _on_main_action_timer_timeout():
 	can_laser = true

@@ -25,7 +25,7 @@ color_ramp = SubResource("GradientTexture1D_4sn28")
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vl2jr"]
 polygon = PackedVector2Array(-43, -43, -30, -46, -26, -46, -23, -53, -11, -56, -10, -55, 7, -60, 13, -57, 24, -61, 33, -55, 37, -48, 45, -42, 45, -35, 49, -29, 60, -26, 70, -18, 80, -9, 87, -10, 97, -6, 110, -2, 114, 3, 125, 3, 124, 7, 131, 7, 135, 15, 134, 25, 129, 33, 123, 31, 123, 36, 115, 36, 104, 41, 97, 52, 65, 53, 61, 47, 64, 41, 48, 41, 41, 44, 25, 48, 14, 56, -5, 60, -24, 60, -33, 52, -35, 46, -40, 40, -40, 34, -48, 28, -51, 22, -48, 17, -55, 11, -58, 0, -58, -12, -54, -25, -50, -31, -50, -37)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Entity"]]
 collision_mask = 23
 script = ExtResource("1_6vrni")
 
@@ -37,19 +37,16 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-51, -30, -50, -36, -43, -43, -26, -47, -23, -53, -11, -56, -10, -55, 7, -60, 13, -57, 24, -61, 33, -55, 37, -48, 45, -42, 45, -35, 49, -29, 56, -28, 60, -26, 67, -22, 80, -9, 87, -10, 92, -9, 110, -2, 114, 3, 125, 3, 124, 7, 131, 7, 136, 15, 135, 26, 129, 33, 124, 32, 124, 37, 119, 38, 115, 37, 104, 41, 97, 52, 65, 53, 61, 47, 64, 41, 48, 41, 41, 44, 25, 48, 14, 56, 4, 59, -5, 60, -14, 61, -24, 60, -33, 52, -35, 46, -40, 40, -40, 34, -44, 32, -48, 28, -51, 22, -48, 17, -55, 11, -58, 0, -58, -13, -57, -20, -54, -25)
-
 [node name="LaserStartPositions" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="LaserStartPositions"]
-position = Vector2(131, 30)
+position = Vector2(205, 32)
 
 [node name="Marker2D2" type="Marker2D" parent="LaserStartPositions"]
-position = Vector2(131, 11)
+position = Vector2(205, 11)
 
 [node name="Marker2D3" type="Marker2D" parent="LaserStartPositions"]
-position = Vector2(134, 20)
+position = Vector2(205, 21)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(135, 20)
@@ -67,6 +64,9 @@ occluder = SubResource("OccluderPolygon2D_vl2jr")
 position = Vector2(39, 1)
 rotation = 1.5708
 texture = ExtResource("1_bovd4")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-51, -30, -50, -36, -43, -43, -26, -47, -23, -53, -11, -56, -10, -55, 7, -60, 13, -57, 24, -61, 33, -55, 37, -48, 45, -42, 45, -35, 49, -29, 56, -28, 60, -26, 67, -22, 80, -9, 87, -10, 92, -9, 110, -2, 114, 3, 125, 3, 124, 7, 131, 7, 136, 15, 135, 26, 129, 33, 124, 32, 124, 37, 119, 38, 115, 37, 104, 41, 97, 52, 65, 53, 61, 47, 64, 41, 48, 41, 41, 44, 25, 48, 14, 56, 4, 59, -5, 60, -14, 61, -24, 60, -33, 52, -35, 46, -40, 40, -40, 34, -44, 32, -48, 28, -51, 22, -48, 17, -55, 11, -58, 0, -58, -13, -57, -20, -54, -25)
 
 [connection signal="timeout" from="MainActionTimer" to="." method="_on_main_action_timer_timeout"]
 [connection signal="timeout" from="SecondaryActionTimer" to="." method="_on_secondary_action_timer_timeout"]
